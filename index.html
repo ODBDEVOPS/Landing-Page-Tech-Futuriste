@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechFlow - Révolutionnez Votre Futur</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00d4ff;
+            --secondary: #7c3aed;
+            --tertiary: #4f46e5;
+            --dark: #0a0e27;
+            --darker: #050812;
+            --text-light: #e0e7ff;
+            --text-muted: #a5b4fc;
+            --accent-pink: #ff006e;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--darker) 0%, #1a1f3a 100%);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ===== TYPOGRAPHIE FLUIDE ===== */
+        h1 {
+            font-size: clamp(2rem, 8vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+        }
+
+        h2 {
+            font-size: clamp(1.5rem, 5vw, 2.8rem);
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: clamp(1.1rem, 3vw, 1.8rem);
+            font-weight: 600;
+        }
+
+        p {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            color: var(--text-muted);
+        }
+
+        /* ===== HEADER STICKY ===== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(5, 8, 18, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            padding: clamp(1rem, 2vw, 1.5rem) clamp(1rem, 5vw, 3rem);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav {
+            display: flex;
+            gap: clamp(1.5rem, 3vw, 3rem);
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 5vw, 3rem);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 10;
+            text-align: center;
+            animation: fadeInUp 1s ease 0.3s backwards;
+        }
+
+        .hero h1 {
+            margin-bottom: clamp(1rem, 2vw, 1.5rem);
+            line-height: 1.1;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--accent-pink), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--text-muted);
+            margin-bottom: clamp(2rem, 4vw, 3rem);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: clamp(0.8rem, 2vw, 1rem) clamp(2rem, 4vw, 3rem);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.5);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* ===== MARQUEE TEXT ===== */
+        .marquee {
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            padding: clamp(1rem, 2vw, 1.5rem) 0;
+            overflow: hidden;
+            position: relative;
+            margin: clamp(2rem, 5vw, 4rem) 0;
+        }
+
+        .marquee-content {
+            display: flex;
+            animation: scroll 30s linear infinite;
+            gap: clamp(2rem, 5vw, 4rem);
+        }
+
+        .marquee-item {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            font-weight: 700;
+            white-space: nowrap;
+            color: var(--dark);
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ===== PARALLAXE SECTION ===== */
+        .parallax-section {
+            position: relative;
+            padding: clamp(4rem, 8vw, 6rem) clamp(1rem, 5vw, 3rem);
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .parallax-bg {
+            position: absolute;
+            top: -10%;
+            right: -5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .parallax-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ===== STATISTIQUES ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: clamp(1.5rem, 3vw, 2rem);
+            margin-top: clamp(2rem, 4vw, 3rem);
+        }
+
+        .stat-card {
+            padding: clamp(1.5rem, 3vw, 2rem);
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(0, 212, 255, 0.05) 100%);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            animation: slideUp 0.6s ease backwards;
+        }
+
+        .stat-card:nth-child(1) { animation-delay: 0s; }
+        .stat-card:nth-child(2) { animation-delay: 0.1s; }
+        .stat-card:nth-child(3) { animation-delay: 0.2s; }
+        .stat-card:nth-child(4) { animation-delay: 0.3s; }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-number {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            color: var(--text-muted);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 3px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
+            width: 0;
+            animation: fillProgress 2s ease forwards;
+        }
+
+        .stat-card:nth-child(1) .progress-fill { animation-delay: 0.5s; --target: 92%; }
+        .stat-card:nth-child(2) .progress-fill { animation-delay: 0.7s; --target: 87%; }
+        .stat-card:nth-child(3) .progress-fill { animation-delay: 0.9s; --target: 95%; }
+        .stat-card:nth-child(4) .progress-fill { animation-delay: 1.1s; --target: 88%; }
+
+        @keyframes fillProgress {
+            to { width: var(--target); }
+        }
+
+        /* ===== ACCORDION FAQ ===== */
+        .faq-section {
+            max-width: 800px;
+            margin: clamp(4rem, 8vw, 6rem) auto;
+            padding: 0 clamp(1rem, 5vw, 3rem);
+        }
+
+        .faq-item {
+            margin-bottom: clamp(1rem, 2vw, 1.5rem);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            animation: slideUp 0.6s ease backwards;
+        }
+
+        .faq-item:nth-child(1) { animation-delay: 0s; }
+        .faq-item:nth-child(2) { animation-delay: 0.1s; }
+        .faq-item:nth-child(3) { animation-delay: 0.2s; }
+        .faq-item:nth-child(4) { animation-delay: 0.3s; }
+
+        .faq-header {
+            padding: clamp(1rem, 2vw, 1.5rem);
+            background: rgba(124, 58, 237, 0.1);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: all 0.3s;
+        }
+
+        .faq-header:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid var(--primary);
+            padding-left: calc(clamp(1rem, 2vw, 1.5rem) - 3px);
+        }
+
+        .faq-header h3 {
+            color: var(--primary);
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        .faq-item.active .faq-content {
+            max-height: 300px;
+        }
+
+        .faq-text {
+            padding: clamp(1rem, 2vw, 1.5rem);
+            color: var(--text-muted);
+        }
+
+        /* ===== FORMULAIRE ===== */
+        .form-section {
+            max-width: 600px;
+            margin: clamp(4rem, 8vw, 6rem) auto;
+            padding: 0 clamp(1rem, 5vw, 3rem);
+        }
+
+        .form-group {
+            margin-bottom: clamp(1.5rem, 3vw, 2rem);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            color: var(--primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: clamp(0.8rem, 2vw, 1rem);
+            background: rgba(0, 212, 255, 0.05);
+            border: 2px solid rgba(0, 212, 255, 0.2);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-family: inherit;
+            font-size: clamp(0.95rem, 2vw, 1rem);
+            transition: all 0.3s;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(0, 212, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: clamp(0.9rem, 2vw, 1.1rem);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .form-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.5);
+        }
+
+        .form-submit:active {
+            transform: translateY(-1px);
+        }
+
+        /* ===== MODAL ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 8, 18, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.15) 0%, rgba(0, 212, 255, 0.1) 100%);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 20px;
+            padding: clamp(2rem, 5vw, 3rem);
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            color: var(--primary);
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: transform 0.3s;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal h2 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .modal p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: rgba(5, 8, 18, 0.9);
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+            padding: clamp(2rem, 4vw, 3rem) clamp(1rem, 5vw, 3rem);
+            margin-top: clamp(4rem, 8vw, 6rem);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        .scroll-to-top {
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            text-align: center;
+            line-height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.5);
+        }
+
+        .scroll-to-top.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* ===== ANIMATIONS SCROLL-TRIGGERED ===== */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .scroll-reveal.revealed {
+            animation: revealUp 0.6s ease forwards;
+        }
+
+        @keyframes revealUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== RESPONSIVITÉ ===== */
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: rgba(5, 8, 18, 0.95);
+                padding: 1.5rem;
+                gap: 1rem;
+                border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .marquee-item {
+                font-size: 1.2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="header-content">
+            <div class="logo">TechFlow</div>
+            <nav id="nav">
+                <a href="#hero">Accueil</a>
+                <a href="#stats">Stats</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1>Révolutionnez Votre <span class="gradient-text">Futur Digital</span></h1>
+            <p class="hero-subtitle">Explorez les technologies futuristes qui transformeront votre entreprise. Innovation, performance et design qui inspirent.</p>
+            <button class="cta-button" onclick="openModal()">Commencer Maintenant</button>
+        </div>
+    </section>
+
+    <!-- ===== MARQUEE TEXT ===== -->
+    <div class="marquee">
+        <div class="marquee-content">
+            <span class="marquee-item">⚡ Tech Avancée</span>
+            <span class="marquee-item">💫 Design Futuriste</span>
+            <span class="marquee-item">🚀 Innovation Continue</span>
+            <span class="marquee-item">⚡ Tech Avancée</span>
+            <span class="marquee-item">💫 Design Futuriste</span>
+            <span class="marquee-item">🚀 Innovation Continue</span>
+        </div>
+    </div>
+
+    <!-- ===== PARALLAX SECTION ===== -->
+    <section class="parallax-section scroll-reveal">
+        <div class="parallax-bg" id="parallaxBg"></div>
+        <div class="parallax-content">
+            <h2>Pourquoi Nous Choisir ?</h2>
+            <p>Notre plateforme combine technologie de pointe et design intuitif pour offrir l'expérience ultime. Nous créons des solutions qui vont bien au-delà de vos attentes.</p>
+        </div>
+    </section>
+
+    <!-- ===== STATISTIQUES ===== -->
+    <section id="stats" class="parallax-section">
+        <h2 class="scroll-reveal">Nos Résultats Parlent</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">10K+</div>
+                <div class="stat-label">Utilisateurs Actifs</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="--target: 92%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Projets Réalisés</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="--target: 87%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">99%</div>
+                <div class="stat-label">Satisfaction Client</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="--target: 95%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Support Disponible</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="--target: 88%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ACCORDION FAQ ===== -->
+    <section id="faq" class="faq-section">
+        <h2 class="scroll-reveal">Questions Fréquentes</h2>
+        <div class="faq-item scroll-reveal">
+            <div class="faq-header">
+                <h3>Comment fonctionne la plateforme ?</h3>
+                <span class="faq-toggle">▼</span>
+            </div>
+            <div class="faq-content">
+                <p class="faq-text">Notre plateforme utilise des technologies cloud avancées pour offrir une expérience fluide et sécurisée. Vous pouvez accéder à tous vos outils depuis n'importe quel appareil.</p>
+            </div>
+        </div>
+
+        <div class="faq-item scroll-reveal">
+            <div class="faq-header">
+                <h3>Quel est le coût de la licence ?</h3>
+                <span class="faq-toggle">▼</span>
+            </div>
+            <div class="faq-content">
+                <p class="faq-text">Nous proposons plusieurs plans adaptés à vos besoins, à partir de 29€/mois. Chaque plan inclut un support prioritaire et des mises à jour gratuites.</p>
+            </div>
+        </div>
+
+        <div class="faq-item scroll-reveal">
+            <div class="faq-header">
+                <h3>Y a-t-il une période d'essai gratuite ?</h3>
+                <span class="faq-toggle">▼</span>
+            </div>
+            <div class="faq-content">
+                <p class="faq-text">Oui ! Vous bénéficiez de 30 jours gratuits pour tester notre plateforme sans engagement. Aucune carte bancaire requise.</p>
+            </div>
+        </div>
+
+        <div class="faq-item scroll-reveal">
+            <div class="faq-header">
+                <h3>Quelle est la sécurité des données ?</h3>
+                <span class="faq-toggle">▼</span>
+            </div>
+            <div class="faq-content">
+                <p class="faq-text">Nous utilisons le chiffrement AES 256 et respectons les normes GDPR. Vos données sont sauvegardées régulièrement dans des datacenters sécurisés.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FORMULAIRE CONTACT ===== -->
+    <section id="contact" class="form-section scroll-reveal">
+        <h2>Restez Connecté</h2>
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="email">Adresse Email</label>
+                <input type="email" id="email" name="email" placeholder="votre@email.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Votre message ici..." required></textarea>
+            </div>
+
+            <button type="submit" class="form-submit">Envoyer</button>
+        </form>
+    </section>
+
+    <!-- ===== MODAL ===== -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2>Commencez Votre Voyage</h2>
+            <p>Rejoignez des milliers d'utilisateurs qui transforment leur futur avec TechFlow. Inscription gratuite, sans frais cachés.</p>
+            <form onsubmit="handleModalSubmit(event)">
+                <div class="form-group">
+                    <label for="modalEmail">Email</label>
+                    <input type="email" id="modalEmail" placeholder="votre@email.com" required>
+                </div>
+                <button type="submit" class="form-submit">Créer un Compte</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-content">
+            <p class="footer-text">© 2025 TechFlow. Tous droits réservés. Conçu avec passion pour l'avenir.</p>
+            <div class="scroll-to-top" id="scrollToTop" onclick="scrollToTop()">↑</div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== HAMBURGER MENU =====
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                nav.classList.remove('active');
+            });
+        });
+
+        // ===== SCROLL REVEAL =====
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ===== PARALLAX EFFECT =====
+        const parallaxBg = document.getElementById('parallaxBg');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            if (parallaxBg) {
+                parallaxBg.style.transform = `translateY(${scrollY * 0.5}px)`;
+            }
+        });
+
+        // ===== ACCORDION FAQ =====
+        const faqHeaders = document.querySelectorAll('.faq-header');
+        faqHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const faqItem = header.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+
+        // ===== FORM VALIDATION =====
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            if (email && message) {
+                console.log('Form submitted:', { email, message });
+                contactForm.reset();
+                alert('Merci ! Nous avons reçu votre message.');
+            }
+        });
+
+        // ===== MODAL =====
+        const modal = document.getElementById('modal');
+
+        function openModal() {
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+
+        function handleModalSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('modalEmail').value;
+            console.log('Account creation:', { email });
+            alert('Bienvenue sur TechFlow ! Vérifiez votre email pour confirmer.');
+            closeModal();
+            document.getElementById('modalEmail').value = '';
+        }
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // ===== SCROLL TO TOP =====
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.remove('hidden');
+            } else {
+                scrollToTopBtn.classList.add('hidden');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // ===== SMOOTH SCROLL FOR NAVIGATION =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Initialize scroll to top button visibility
+        scrollToTopBtn.classList.add('hidden');
+    </script>
+</body>
+</html>
