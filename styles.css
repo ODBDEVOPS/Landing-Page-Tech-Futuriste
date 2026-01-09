@@ -78,15 +78,29 @@ nav {
     gap: clamp(1.5rem, 3vw, 3rem);
 }
 
-nav a {
+/* ===== MENU NAVIGATION AVEC NIVEAUX ===== */
+.nav-menu {
+    display: flex;
+    gap: clamp(1.5rem, 3vw, 3rem);
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
     color: var(--text-muted);
     text-decoration: none;
     font-weight: 500;
     position: relative;
     transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
 }
 
-nav a::after {
+.nav-link::after {
     content: '';
     position: absolute;
     bottom: -5px;
@@ -97,11 +111,112 @@ nav a::after {
     transition: width 0.3s ease;
 }
 
-nav a:hover {
+.nav-link:hover {
     color: var(--primary);
 }
 
-nav a:hover::after {
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.arrow {
+    font-size: 0.7rem;
+    transition: transform 0.3s ease;
+}
+
+.nav-item.has-submenu:hover .arrow {
+    transform: rotate(180deg);
+}
+
+/* ===== SUBMENU DROPDOWN ===== */
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: linear-gradient(135deg, rgba(5, 8, 18, 0.95) 0%, rgba(10, 14, 39, 0.95) 100%);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 12px;
+    min-width: 250px;
+    padding: 1rem 0;
+    margin-top: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+}
+
+.nav-item.has-submenu:hover .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.submenu-link {
+    display: block;
+    padding: 0.8rem 1.5rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+.submenu-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--primary), var(--secondary));
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.3s ease;
+}
+
+.submenu-link:hover {
+    color: var(--primary);
+    background: rgba(0, 212, 255, 0.1);
+    padding-left: 2rem;
+}
+
+.submenu-link:hover::before {
+    transform: scaleY(1);
+}
+
+/* ===== SUBMENU COLONNES (Pour Services) ===== */
+.submenu.columns {
+    min-width: 400px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 1.5rem 0;
+}
+
+.submenu-column {
+    padding: 0 1.5rem;
+}
+
+.submenu-column h4 {
+    color: var(--primary);
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    font-weight: 700;
+}
+
+.submenu-column:first-child h4 {
+    margin-top: 0;
+}
+
+/* ===== INDICATEUR ACTIF ===== */
+.nav-item a.active {
+    color: var(--primary);
+}
+
+.nav-item a.active::after {
     width: 100%;
 }
 
@@ -671,6 +786,69 @@ footer {
 
     .hamburger {
         display: flex;
+    }
+
+    /* Mobile Submenu */
+    .nav-item {
+        border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        padding-bottom: 1rem;
+    }
+
+    .nav-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .submenu {
+        position: static;
+        background: rgba(0, 212, 255, 0.05);
+        border: 1px solid rgba(0, 212, 255, 0.15);
+        min-width: auto;
+        padding: 0.5rem 0;
+        margin-top: 0.5rem;
+        opacity: 0;
+        visibility: hidden;
+        max-height: 0;
+        overflow: hidden;
+        transform: none;
+        transition: all 0.3s ease;
+        border-radius: 8px;
+    }
+
+    .nav-item.has-submenu:hover .submenu,
+    .nav-item.has-submenu.active .submenu {
+        opacity: 1;
+        visibility: visible;
+        max-height: 500px;
+    }
+
+    .submenu.columns {
+        min-width: auto;
+        grid-template-columns: 1fr;
+        padding: 0.5rem 0;
+    }
+
+    .submenu-column {
+        padding: 0.5rem 1.5rem;
+    }
+
+    .submenu-column h4 {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .submenu-link {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .arrow {
+        font-size: 0.7rem;
+        transition: transform 0.3s ease;
+    }
+
+    .nav-item.has-submenu.active .arrow {
+        transform: rotate(180deg);
     }
 
     .marquee-item {
